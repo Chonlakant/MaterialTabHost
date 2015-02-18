@@ -1,0 +1,26 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="header_height">298dp</dimen>
+    <dimen name="min_header_height">250dp</dimen>
+    <dimen name="header_logo_size">100dp</dimen>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Body content Vdomax -->
+    <dimen name="text_size_layout_small">8sp</dimen>
+    <dimen name="text_size_layout_medim">10sp</dimen>
+    <dimen name="text_size_layout_large">18sp</dimen>
+
+
+    <dimen name="margin_size_layout_small">8dp</dimen>
+    <dimen name="margin_size_layout_medium">10dp</dimen>
+    <dimen name="margin_size_layout_large">16dp</dimen>
+
+
+    <dimen name="padding_size_layout_small">8dp</dimen>
+    <dimen name="padding_size_layout_medium">10dp</dimen>
+    <dimen name="padding_size_layout_large">16dp</dimen>
+
+    <dimen name="height_size_button_content">48dp</dimen>
+</resources>
