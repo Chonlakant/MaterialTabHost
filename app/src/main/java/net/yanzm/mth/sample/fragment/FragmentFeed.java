@@ -1,4 +1,4 @@
-package net.yanzm.mth.sample;
+package net.yanzm.mth.sample.fragment;
 
 
 import android.animation.AnimatorSet;
@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -18,6 +17,10 @@ import android.widget.RelativeLayout;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.androidquery.util.AQUtility;
+
+import net.yanzm.mth.sample.R;
+import net.yanzm.mth.sample.adapter.AdapterJson;
+import net.yanzm.mth.sample.model.ItemFeed;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,7 +44,7 @@ public class FragmentFeed extends Fragment {
         adapterJson = new AdapterJson(getActivity(), list);
 
 
-        layoutMenu = (RelativeLayout)rootView.findViewById(R.id.layoutMenu);
+        //layoutMenu = (RelativeLayout)rootView.findViewById(R.id.layoutMenu);
 
         RecyclerView recList = (RecyclerView) rootView.findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
@@ -49,53 +52,62 @@ public class FragmentFeed extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
 
+
         recList.setAdapter(adapterJson);
 
-        recList.setOnTouchListener(new View.OnTouchListener() {
+//        recList.setOnTouchListener(new View.OnTouchListener() {
+//
+//            final int DISTANCE = 3;
+//
+//            float startY = 0;
+//            float dist = 0;
+//            boolean isMenuHide = false;
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//                int action = event.getAction();
+//
+//                if (action == MotionEvent.ACTION_DOWN) {
+//                    startY = event.getY();
+//                } else if (action == MotionEvent.ACTION_MOVE) {
+//                    dist = event.getY() - startY;
+//
+//                    if ((pxToDp((int) dist) <= -DISTANCE) && !isMenuHide) {
+//                        isMenuHide = true;
+//                        hideMenuBar();
+//                    } else if ((pxToDp((int) dist) > DISTANCE) && isMenuHide) {
+//                        isMenuHide = false;
+//                        showMenuBar();
+//                    }
+//
+//                    if ((isMenuHide && (pxToDp((int) dist) <= -DISTANCE))
+//                            || (!isMenuHide && (pxToDp((int) dist) > 0))) {
+//                        startY = event.getY();
+//                    }
+//                } else if (action == MotionEvent.ACTION_UP) {
+//                    startY = 0;
+//                }
+//
+//                return false;
+//            }
+//        });
 
-            final int DISTANCE = 3;
-
-            float startY = 0;
-            float dist = 0;
-            boolean isMenuHide = false;
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                int action = event.getAction();
-
-                if (action == MotionEvent.ACTION_DOWN) {
-                    startY = event.getY();
-                } else if (action == MotionEvent.ACTION_MOVE) {
-                    dist = event.getY() - startY;
-
-                    if ((pxToDp((int) dist) <= -DISTANCE) && !isMenuHide) {
-                        isMenuHide = true;
-                        hideMenuBar();
-                    } else if ((pxToDp((int) dist) > DISTANCE) && isMenuHide) {
-                        isMenuHide = false;
-                        showMenuBar();
-                    }
-
-                    if ((isMenuHide && (pxToDp((int) dist) <= -DISTANCE))
-                            || (!isMenuHide && (pxToDp((int) dist) > 0))) {
-                        startY = event.getY();
-                    }
-                } else if (action == MotionEvent.ACTION_UP) {
-                    startY = 0;
-                }
-
-                return false;
-            }
-        });
-
-        aq.ajax(url3, JSONObject.class, this, "getjson");
+        aq.ajax(url3, JSONObject.class, this, "getJson");
 
         return rootView;
     }
-    public void getjson(String url, JSONObject jo, AjaxStatus status)
+
+//    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//
+//
+//    }
+
+    public void getJson(String url, JSONObject jo, AjaxStatus status)
             throws JSONException {
         AQUtility.debug("jo", jo);
-
+        Log.d("Check_Feed:","Test1");
         if (jo != null) {
             JSONArray ja = jo.getJSONArray("posts");
             for (int i = 0; i < ja.length(); i++) {
@@ -110,6 +122,7 @@ public class FragmentFeed extends Fragment {
                 Log.i(".......",photo);
 
                 String Avatra = "https://graph.facebook.com/v2.1/"+IdAvayta+"/picture?type=large";
+
 
 
                 JSONObject author = obj.getJSONObject("author");

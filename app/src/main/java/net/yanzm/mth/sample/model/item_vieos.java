@@ -1,4 +1,4 @@
-package net.yanzm.mth.sample;
+package net.yanzm.mth.sample.model;
 
 /**
  * Created by root1 on 1/31/15.

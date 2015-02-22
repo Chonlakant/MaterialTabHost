@@ -1,29 +1,32 @@
-package net.yanzm.mth.sample;
+package net.yanzm.mth.sample.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gc.materialdesign.views.ButtonRectangle;
+import com.github.siyamed.shapeimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
+
+import net.yanzm.mth.sample.model.ItemFeed;
+import net.yanzm.mth.sample.R;
 
 import java.util.ArrayList;
 
 /**
- * Created by root1 on 1/30/15.
+ * Created by root1 on 2/18/15.
  */
-public class Adapter_Listview extends BaseAdapter {
+public class AdapterFriends extends BaseAdapter {
 
     Context context;
 
 
-    public ArrayList<item_friends> list = new ArrayList<item_friends>();
+    public ArrayList<ItemFeed> list = new ArrayList<ItemFeed>();
 
-    public Adapter_Listview(Context context, ArrayList<item_friends> list) {
+    public AdapterFriends(Context context, ArrayList<ItemFeed> list) {
         this.context = context;
         this.list = list;
     }
@@ -48,26 +51,25 @@ public class Adapter_Listview extends BaseAdapter {
         LayoutInflater mInflater =
                 (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View row = mInflater.inflate(R.layout.item_grid, parent, false);
-        Button btn ;
+        View row = mInflater.inflate(R.layout.item_friends, parent, false);
+        ButtonRectangle btn;
         TextView month;
         TextView date;
-        ImageView ImageUrl;
-        item_friends item = list.get(position);
+        CircularImageView ImageUrl;
+        ItemFeed item = list.get(position);
         month = (TextView) row.findViewById(R.id.item_title);
-        btn = (Button) row.findViewById(R.id.btn_follow);
+        btn = (ButtonRectangle) row.findViewById(R.id.btn_f);
         //date = (TextView) row.findViewById(R.id.textView2);
-        ImageUrl = (ImageView) row.findViewById(R.id.item_img);
+        ImageUrl = (CircularImageView) row.findViewById(R.id.item_img);
 
-        month.setText(item.getTxt_name());
+        month.setText(item.getMonth());
         //date.setText(item.getTxt_friends());
 
         Picasso.with(context)
-                .load(item.getImageurl())
-                .transform(new RoundedTransformation(50, 4))
-                .centerCrop()
-                .resize(100, 100)
+                .load(item.getImageUrl())
+                .fit().centerCrop()
                 .into(ImageUrl);
+
         return row;
     }
 }

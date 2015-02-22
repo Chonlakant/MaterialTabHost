@@ -1,4 +1,4 @@
-package net.yanzm.mth.sample;
+package net.yanzm.mth.sample.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import net.yanzm.mth.sample.R;
+import net.yanzm.mth.sample.model.itemChannels;
 
 import java.util.ArrayList;
 //AdapterVideos

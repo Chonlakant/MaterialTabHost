@@ -1,4 +1,4 @@
-package net.yanzm.mth.sample;
+package net.yanzm.mth.sample.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.squareup.picasso.Picasso;
+
+import net.yanzm.mth.sample.model.ItemFeed;
+import net.yanzm.mth.sample.R;
+import net.yanzm.mth.sample.RoundedTransformation;
 
 import java.util.ArrayList;
 
@@ -57,7 +61,7 @@ public class AdapterJson extends RecyclerView.Adapter<AdapterJson.ContactViewHol
 
         Picasso.with(context)
                 .load(item.getImage_messen())
-                .placeholder(R.drawable.ic_launcher)
+                .placeholder(R.drawable.vdomax)
 
                 .fit().centerCrop()
                 .into(contactViewHolder.image_messen);

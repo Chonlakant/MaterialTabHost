@@ -1,5 +1,5 @@
 
-package net.yanzm.mth.sample;
+package net.yanzm.mth.sample.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -27,6 +27,10 @@ import com.github.siyamed.shapeimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
 import net.yanzm.mth.MaterialTabHost;
+import net.yanzm.mth.sample.R;
+import net.yanzm.mth.sample.adapter.AdapterDrawer;
+import net.yanzm.mth.sample.fragment.FragmentFeed;
+import net.yanzm.mth.sample.fragment.FragmentFriends;
 
 import java.util.Locale;
 import java.util.Random;
@@ -44,6 +48,7 @@ public class SampleActivity extends ActionBarActivity {
 
     int[] photos = {R.drawable.photo1, R.drawable.phpto2, R.drawable.photo3};
     KenBurnsView imageView;
+
     CircularImageView mHeaderLogo;
     CircularImageView titleLogo;
     Button btn_f;
@@ -63,13 +68,15 @@ public class SampleActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
         imageView = (KenBurnsView) findViewById(R.id.header_picture);
-        titleLogo = (CircularImageView) findViewById(R.id.title_thumbnail);
+
+
         mHeaderLogo = (CircularImageView) findViewById(R.id.header_thumbnail);
 
        // btn_f = (Button) findViewById(R.id.btn_f);
         listView = (ListView) findViewById(R.id.list_drawer);
         AdapterDrawer adapterDrawer = new AdapterDrawer(getApplication(),list,resId);
         listView.setAdapter(adapterDrawer);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -80,25 +87,25 @@ public class SampleActivity extends ActionBarActivity {
                 }
                 if(position == 1){
                     Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(getApplication(),Activity_Videos.class);
+                    Intent i = new Intent(getApplication(),ActivityVideos.class);
                     startActivity(i);
                     mDrawerLayout.closeDrawers();
                 }
                 if(position == 2){
                     Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(getApplication(),Activity_AddFriends.class);
+                    Intent i = new Intent(getApplication(),ActivityAddFriends.class);
                     startActivity(i);
                     mDrawerLayout.closeDrawers();
                 }
                 if(position == 3){
                     Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(getApplication(),Activity_channels.class);
+                    Intent i = new Intent(getApplication(),ActivityChannels.class);
                     startActivity(i);
                     mDrawerLayout.closeDrawers();
                 }
                 if(position == 4){
                     Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(getApplication(),Activity_create_group.class);
+                    Intent i = new Intent(getApplication(),ActivityCreateGroup.class);
                     startActivity(i);
                     mDrawerLayout.closeDrawers();
                 }
@@ -113,17 +120,11 @@ public class SampleActivity extends ActionBarActivity {
                 .load("https://graph.facebook.com/v2.1/12962/picture?type=large")
                 .placeholder(R.drawable.ic_launcher)
                 .fit().centerCrop()
-
+                .placeholder(R.drawable.vdomax)
                 //.transform(new RoundedTransformation(50, 4))
                 .into(mHeaderLogo);
 
-        Picasso.with(this)
-                .load("https://graph.facebook.com/v2.1/12962/picture?type=large")
-                .placeholder(R.drawable.ic_launcher)
-                .fit().centerCrop()
 
-                //.transform(new RoundedTransformation(50, 4))
-                .into(titleLogo);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setElevation(0);

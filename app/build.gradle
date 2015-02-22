@@ -38,4 +38,5 @@ dependencies {
     compile 'com.flaviofaria:kenburnsview:1.0.5'
     compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
     compile project(':libraryfloation')
+    compile project(':observablescrollview')
 }

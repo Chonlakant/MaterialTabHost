@@ -1,5 +1,4 @@
-package net.yanzm.mth.sample;
-
+package net.yanzm.mth.sample.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,6 +10,10 @@ import android.widget.GridView;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.androidquery.util.AQUtility;
+
+import net.yanzm.mth.sample.R;
+import net.yanzm.mth.sample.adapter.AdapterFriends;
+import net.yanzm.mth.sample.model.ItemFeed;
 
 import org.json.JSONArray;
 import org.json.JSONException;

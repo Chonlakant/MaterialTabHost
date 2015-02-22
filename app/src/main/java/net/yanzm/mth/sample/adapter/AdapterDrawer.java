@@ -1,4 +1,4 @@
-package net.yanzm.mth.sample;
+package net.yanzm.mth.sample.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import net.yanzm.mth.sample.R;
 
 /**
  * Created by root1 on 2/18/15.

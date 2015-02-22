@@ -1,8 +1,9 @@
-package net.yanzm.mth.sample;
+package net.yanzm.mth.sample.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,13 +14,17 @@ import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.androidquery.util.AQUtility;
 
+import net.yanzm.mth.sample.R;
+import net.yanzm.mth.sample.adapter.Adapter_Channels;
+import net.yanzm.mth.sample.model.itemChannels;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Activity_channels extends Activity {
+public class ActivityChannels extends Activity {
     // Store instance variables
     //private String title;
     public AQuery aq;
@@ -32,6 +37,8 @@ public class Activity_channels extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_channels);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Sam Savek (@samsavek)");
         aq = new AQuery(this);
         adapterJson = new Adapter_Channels(this, list);
         listView = (GridView) findViewById(R.id.gridview);
@@ -42,7 +49,7 @@ public class Activity_channels extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(),"sd",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(getApplicationContext(),Activity_VideoPlaying.class);
+                Intent i = new Intent(getApplicationContext(),ActivityVideoPlaying.class);
                 startActivity(i);
             }
         });

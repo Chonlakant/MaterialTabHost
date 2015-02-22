@@ -25,7 +25,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SampleActivity"
+            android:name=".activity.SampleActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,11 +33,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity_Videos"/>
-        <activity android:name=".Activity_channels"/>
-        <activity android:name=".Activity_AddFriends"/>
-        <activity android:name=".Activity_VideoPlaying"/>
-        <activity android:name=".Activity_create_group"/>
+        <activity android:name=".activity.ActivityVideos"/>
+        <activity android:name=".activity.ActivityChannels"/>
+        <activity android:name=".activity.ActivityAddFriends"/>
+        <activity android:name=".activity.ActivityVideoPlaying"/>
+        <activity android:name=".activity.ActivityCreateGroup"/>
     </application>
 
 </manifest>

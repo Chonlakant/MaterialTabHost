@@ -1,6 +1,7 @@
-package net.yanzm.mth.sample;
+package net.yanzm.mth.sample.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import net.yanzm.mth.sample.R;
+import net.yanzm.mth.sample.RoundedTransformation;
+import net.yanzm.mth.sample.model.item_create_group;
 
 import java.util.ArrayList;
 
@@ -48,6 +53,9 @@ public class Adapter_create_group extends BaseAdapter {
                 (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View row = mInflater.inflate(R.layout.item_creategroup, parent, false);
+
+        Toolbar toolbar = (Toolbar) row.findViewById(R.id.toolbar);
+        toolbar.setTitle("Sam Savek (@samsavek)");
         TextView txt_group_name;
         TextView count;
         TextView members;

@@ -1,4 +1,4 @@
-package net.yanzm.mth.sample;
+package net.yanzm.mth.sample.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

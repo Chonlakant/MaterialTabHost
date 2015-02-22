@@ -25,52 +25,11 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
-        <FrameLayout
-            android:id="@+id/title_header"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="170dp">
-
-            <com.flaviofaria.kenburnsview.KenBurnsView
-                android:id="@+id/title_picture"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/photo1" />
-
-            <com.github.siyamed.shapeimageview.CircularImageView
-                android:id="@+id/title_thumbnail"
-                app:siBorderColor="#ffffff"
-                app:siBorderWidth="3dp"
-                android:layout_width="@dimen/header_logo_size"
-                android:layout_height="@dimen/header_logo_size"
-                android:layout_gravity="center|left|top"
-                android:layout_marginLeft="@dimen/margin_size_layout_medium"
-                android:layout_marginTop="@dimen/margin_size_layout_medium"
-                android:src="@drawable/ic_launcher" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_size_layout_medium"
-                android:text="Chonlakant Sattaboot"
-                android:layout_marginTop="40dp"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:layout_gravity="center_vertical" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_size_layout_medium"
-                android:text="Sattaboot11@gmail.com"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="60dp" />
-        </FrameLayout>
-
 
         <net.yanzm.mth.MaterialTabHost
             android:id="@android:id/tabhost"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content" />
 
 
@@ -81,9 +40,9 @@
 
     </LinearLayout>
 
-    <net.yanzm.mth.sample.ScrimInsetsFrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <net.yanzm.mth.sample.widget.ScrimInsetsFrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/scrimInsetsFrameLayout"
-        android:layout_width="400dp"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@android:color/white"
@@ -104,7 +63,7 @@
                 android:id="@+id/header"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="180dp">
 
                 <com.flaviofaria.kenburnsview.KenBurnsView
                     android:id="@+id/header_picture"
@@ -122,32 +81,38 @@
                     android:layout_marginTop="@dimen/margin_size_layout_medium"
                     android:src="@drawable/ic_launcher" />
 
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_size_layout_medium"
-                    android:text="Chonlakant Sattaboot"
-                    android:layout_marginTop="30dp"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-                    android:layout_gravity="center_vertical" />
+                    android:layout_marginRight="@dimen/margin_size_layout_medium"
+                    android:layout_weight="1"
+                    android:layout_gravity="left|bottom"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_size_layout_medium"
-                    android:text="Sattaboot11@gmail.com"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="50dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_size_layout_medium"
+                        android:text="Chonlakant Sattaboot"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:layout_gravity="left" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_size_layout_medium"
+                        android:text="Sattaboot11@gmail.com"
+                        android:layout_gravity="left" />
+                </LinearLayout>
+
             </FrameLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/padding_size_layout_large"
-                android:paddingLeft="@dimen/padding_size_layout_large"
-                android:paddingRight="@dimen/padding_size_layout_large"
+                android:background="#F7F7F7"
+                android:layout_height="60dp"
                 android:gravity="top">
 
 
@@ -168,42 +133,37 @@
                 android:orientation="vertical"
                 android:id="@+id/left_drawer"
                 android:background="#ffffff"
-                android:layout_width="400dp"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="start">
 
                 <ListView
                     android:id="@+id/list_drawer"
-
-                    android:background="#F7F7F7"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
 
                 </ListView>
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:padding="@dimen/padding_size_layout_large"
-                    android:paddingLeft="@dimen/padding_size_layout_large"
-                    android:paddingRight="@dimen/padding_size_layout_large">
 
-                    <Button
-                        android:text="Log Out"
-                        android:textColor="#000000"
-                        android:background="#ffffff"
-                        android:layout_marginLeft="@dimen/margin_size_layout_medium"
-                        android:layout_width="120dp"
-                        android:layout_height="50dp" />
-                </LinearLayout>
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:text="Log Out"
+                    android:textColor="#ffffff"
+                    android:background="#312783"
+                    android:layout_marginLeft="@dimen/margin_size_layout_medium"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="left"
+                    android:gravity="top" />
+
             </LinearLayout>
         </LinearLayout>
 
-    </net.yanzm.mth.sample.ScrimInsetsFrameLayout>
+    </net.yanzm.mth.sample.widget.ScrimInsetsFrameLayout>
+
+    <!--<include layout="@layout/button"/>-->
 
 </android.support.v4.widget.DrawerLayout>

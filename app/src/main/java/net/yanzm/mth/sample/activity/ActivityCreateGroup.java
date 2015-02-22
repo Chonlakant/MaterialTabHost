@@ -1,4 +1,4 @@
-package net.yanzm.mth.sample;
+package net.yanzm.mth.sample.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,13 +12,17 @@ import com.androidquery.util.AQUtility;
 import com.github.siyamed.shapeimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
+import net.yanzm.mth.sample.R;
+import net.yanzm.mth.sample.adapter.Adapter_Listview;
+import net.yanzm.mth.sample.model.item_friends;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Activity_create_group extends Activity {
+public class ActivityCreateGroup extends Activity {
     // Store instance variables
     //private String title;
     public AQuery aq;
