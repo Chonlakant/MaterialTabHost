@@ -14,8 +14,7 @@
         android:gravity="center"
         android:layout_marginTop="@dimen/margin_size_layout_medium"
         android:stretchMode="columnWidth"
-        android:numColumns="3">
-
+        android:numColumns="@integer/grid_view_numcolumns">
         </GridView>
 
 </FrameLayout>

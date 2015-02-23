@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.1"
     defaultConfig {
         applicationId 'net.yanzm.mth.sample'
-        minSdkVersion 10
+        minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"

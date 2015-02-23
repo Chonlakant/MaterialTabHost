@@ -11,7 +11,7 @@ import com.gc.materialdesign.views.ButtonRectangle;
 import com.github.siyamed.shapeimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
-import net.yanzm.mth.sample.model.ItemFeed;
+import net.yanzm.mth.sample.model.Post;
 import net.yanzm.mth.sample.R;
 
 import java.util.ArrayList;
@@ -24,9 +24,9 @@ public class AdapterFriends extends BaseAdapter {
     Context context;
 
 
-    public ArrayList<ItemFeed> list = new ArrayList<ItemFeed>();
+    public ArrayList<Post> list = new ArrayList<Post>();
 
-    public AdapterFriends(Context context, ArrayList<ItemFeed> list) {
+    public AdapterFriends(Context context, ArrayList<Post> list) {
         this.context = context;
         this.list = list;
     }
@@ -56,17 +56,17 @@ public class AdapterFriends extends BaseAdapter {
         TextView month;
         TextView date;
         CircularImageView ImageUrl;
-        ItemFeed item = list.get(position);
+        Post item = list.get(position);
         month = (TextView) row.findViewById(R.id.item_title);
         btn = (ButtonRectangle) row.findViewById(R.id.btn_f);
         //date = (TextView) row.findViewById(R.id.textView2);
         ImageUrl = (CircularImageView) row.findViewById(R.id.item_img);
 
-        month.setText(item.getMonth());
+        month.setText(item.getName());
         //date.setText(item.getTxt_friends());
 
         Picasso.with(context)
-                .load(item.getImageUrl())
+                .load(item.getImageProfileUrl())
                 .fit().centerCrop()
                 .into(ImageUrl);
 

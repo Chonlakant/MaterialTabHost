@@ -13,7 +13,7 @@ import com.androidquery.util.AQUtility;
 
 import net.yanzm.mth.sample.R;
 import net.yanzm.mth.sample.adapter.AdapterFriends;
-import net.yanzm.mth.sample.model.ItemFeed;
+import net.yanzm.mth.sample.model.Post;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +26,7 @@ public class FragmentFriends extends Fragment {
     String url2 = "http://ihdmovie.xyz/feed.json";
     String url3 = "http://ihdmovie.xyz/feed2.json";
 
-    ArrayList<ItemFeed> list = new ArrayList<ItemFeed>();
+    ArrayList<Post> list = new ArrayList<Post>();
     AdapterFriends adapterJson;
     GridView gridView;
 
@@ -69,9 +69,9 @@ public class FragmentFriends extends Fragment {
                 String name_title = obj.optString("name");
 
 
-                ItemFeed list_item = new ItemFeed();
-                list_item.setImageUrl(Avatra);
-                list_item.setMonth(name_title);
+                Post list_item = new Post(Avatra, name_title, null, null, null, null, null, null, null,null);
+//                list_item.setImageProfileUrl(Avatra);
+//                list_item.setMonth(name_title);
 
 //
 //

@@ -1,91 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:padding="10dp"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/image_title" />
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_weight="1">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/image_size_profile"
+                android:layout_height="@dimen/image_size_profile"
+                android:id="@+id/imageView10"
+                android:paddingLeft="5dp"
+                android:gravity="center" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <FrameLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1">
-                    <ImageView
-                    android:layout_width="200dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/image_title"
-                        android:src="@drawable/vdo_thumb" />
-                </FrameLayout>
+                    android:textSize="14sp"
+                    android:layout_marginLeft="@dimen/margin_size_layout_medium"
+                    android:text="Aung"
+                    android:layout_weight="1"
+                    android:textColor="#000000"
+                    android:id="@+id/textView10" />
 
-                <FrameLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1">
-                    <ImageView
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:id="@+id/imageView10"
-                        android:paddingLeft="5dp"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:layout_marginLeft="@dimen/margin_size_layout_medium"
-                        android:text="Aung"
-                        android:layout_weight="1"
-                        android:textColor="#000000"
-                        android:id="@+id/textView10" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="11 days ago"
-                        android:id="@+id/textView11"
-                        android:textSize="10sp"
-                        android:layout_marginTop="@dimen/margin_size_layout_medium"
-                        android:layout_marginLeft="@dimen/margin_size_layout_medium"
-                        android:gravity="center"
-                        android:textColor="#000000" />
-
-                    <com.gc.materialdesign.views.ButtonRectangle
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="+ Follow"
-                        android:id="@+id/day"
-                        android:textSize="10sp"
-                        android:gravity="center"
-                        android:textColor="#9497A3"
-                        android:visibility="gone" />
-                </FrameLayout>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Follow"
+                    android:id="@+id/button3" />
 
 
             </LinearLayout>
 
+            <ImageView
+                android:layout_width="@dimen/image_size_vdo"
+                android:layout_height="@dimen/image_size_vdo" />
+
         </LinearLayout>
 
-        <RelativeLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11 days ago"
+            android:id="@+id/textView11"
+            android:textSize="10sp"
+            android:layout_marginTop="@dimen/margin_size_layout_medium"
+            android:layout_marginLeft="@dimen/margin_size_layout_medium"
+            android:gravity="center"
+            android:textColor="#000000" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_size_layout_medium"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="3"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:layout_marginLeft="@dimen/margin_size_layout_medium"
+                android:id="@+id/number1"
+                android:textSize="@dimen/text_size_medium" />
 
-        </RelativeLayout>
+            <ImageView
+                android:layout_width="@dimen/size_image"
+                android:layout_height="@dimen/size_image"
+                android:background="@drawable/favorite"
+                android:layout_marginLeft="@dimen/margin_size_layout_small"
+                android:id="@+id/imageView2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="2"
+                android:textColor="#000000"
+                android:id="@+id/number2"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/margin_size_layout_small"
+                android:textSize="@dimen/text_size_medium" />
+
+            <ImageView
+                android:layout_width="@dimen/size_image"
+                android:layout_height="@dimen/size_image"
+                android:background="@drawable/answer"
+                android:id="@+id/imageView3"
+                android:layout_marginLeft="@dimen/margin_size_layout_small" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="0"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:id="@+id/number3"
+                android:layout_marginLeft="@dimen/margin_size_layout_small"
+                android:textSize="@dimen/text_size_medium" />
+
+            <ImageView
+                android:layout_width="@dimen/size_image"
+                android:layout_height="@dimen/size_image"
+                android:background="@drawable/notifications"
+                android:layout_marginLeft="@dimen/margin_size_layout_small"
+                android:id="@+id/imageView4" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="view"
+                android:textColor="#000000"
+                android:gravity="right"
+                android:layout_marginLeft="@dimen/margin_size_layout_small"
+                android:textSize="@dimen/text_size_medium" />
+        </LinearLayout>
 
     </LinearLayout>
+
+
+</LinearLayout>
 

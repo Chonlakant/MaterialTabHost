@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/mth/app.iml" filepath="$PROJECT_DIR$/mth/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraryfloation/libraryfloation.iml" filepath="$PROJECT_DIR$/libraryfloation/libraryfloation.iml" />
       <module fileurl="file://$PROJECT_DIR$/mth/mth.iml" filepath="$PROJECT_DIR$/mth/mth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/observablescrollview/observablescrollview.iml" filepath="$PROJECT_DIR$/observablescrollview/observablescrollview.iml" />
     </modules>
   </component>
 </project>

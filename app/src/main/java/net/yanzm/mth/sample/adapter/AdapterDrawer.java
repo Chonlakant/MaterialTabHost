@@ -47,7 +47,7 @@ public class AdapterDrawer extends BaseAdapter {
         textView.setText(strName[position]);
 
         ImageView imageView = (ImageView)view.findViewById(R.id.imageView6);
-        imageView.setBackgroundResource(resId[position]);
+        imageView.setBackgroundResource(resId[position % resId.length]);
 
         return view;
     }

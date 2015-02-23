@@ -60,7 +60,7 @@ public class SampleActivity extends ActionBarActivity {
             , R.drawable.ic_nature_black_24dp};
 
     String[] list = {"My Profile", "Live History", "Setting"
-            , "Max point", "Tattoo Store", "Terms & Policeies"};
+            , "Max point", "Tattoo Store", "Terms & Policeies","Test"};
 
 
     @Override
@@ -195,6 +195,7 @@ public class SampleActivity extends ActionBarActivity {
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(pagerAdapter);
+
         viewPager.setOnPageChangeListener(tabHost);
 
         tabHost.setOnTabChangeListener(new MaterialTabHost.OnTabChangeListener() {
@@ -203,6 +204,8 @@ public class SampleActivity extends ActionBarActivity {
                 viewPager.setCurrentItem(position);
             }
         });
+
+
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -218,7 +221,6 @@ public class SampleActivity extends ActionBarActivity {
             switch (position) {
                 case 0:
                     return new FragmentFeed();
-
                 case 1:
                     return new FragmentFeed();
                 case 2:
@@ -227,8 +229,6 @@ public class SampleActivity extends ActionBarActivity {
                     return new FragmentFriends();
                 case 4:
                     return new FragmentFeed();
-
-
             }
             return null;
         }

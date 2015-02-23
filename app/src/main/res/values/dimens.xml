@@ -8,9 +8,9 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- Body content Vdomax -->
-    <dimen name="text_size_layout_small">8sp</dimen>
-    <dimen name="text_size_layout_medium">10sp</dimen>
-    <dimen name="text_size_layout_large">18sp</dimen>
+    <dimen name="text_size_small">8sp</dimen>
+    <dimen name="text_size_medium">13sp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
 
 
     <dimen name="margin_size_layout_small">8dp</dimen>
@@ -24,4 +24,12 @@
 
     <dimen name="height_size_button_content">48dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
+
+    <dimen name="feed_image_height">240dp</dimen>
+    <dimen name="image_size_vdo">20dp</dimen>
+    <dimen name="image_size_profile">45dp</dimen>
+    <dimen name="size_image">25dp</dimen>
+
+
+
 </resources>

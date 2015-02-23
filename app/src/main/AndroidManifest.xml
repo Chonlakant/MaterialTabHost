@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 Yuki Anzai anzai.y.aa@gmail.com
+<!--
+ Copyright (C) 2014 Yuki Anzai anzai.y.aa@gmail.com
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -13,9 +14,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.yanzm.mth.sample">
+    package="net.yanzm.mth.sample" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -23,21 +23,26 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".activity.SampleActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ActivityVideos"/>
-        <activity android:name=".activity.ActivityChannels"/>
-        <activity android:name=".activity.ActivityAddFriends"/>
-        <activity android:name=".activity.ActivityVideoPlaying"/>
-        <activity android:name=".activity.ActivityCreateGroup"/>
+        <activity android:name=".activity.ActivityVideos" />
+        <activity android:name=".activity.ActivityChannels" />
+        <activity android:name=".activity.ActivityAddFriends" />
+        <activity android:name=".activity.ActivityVideoPlaying" />
+        <activity android:name=".activity.ActivityCreateGroup" />
+        <activity
+            android:name=".activity.ActivityComment"
+            android:label="@string/title_activity_activity_comment" >
+        </activity>
+
     </application>
 
 </manifest>

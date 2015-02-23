@@ -1,6 +1,7 @@
 package net.yanzm.mth.sample.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -8,25 +9,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
+import com.gc.materialdesign.views.ButtonFlat;
 import com.squareup.picasso.Picasso;
 
-import net.yanzm.mth.sample.model.ItemFeed;
+import net.yanzm.mth.sample.activity.ActivityComment;
+import net.yanzm.mth.sample.model.Post;
 import net.yanzm.mth.sample.R;
 import net.yanzm.mth.sample.RoundedTransformation;
 
 import java.util.ArrayList;
 
+import static android.support.v4.app.ActivityCompat.startActivity;
+
 public class AdapterJson extends RecyclerView.Adapter<AdapterJson.ContactViewHolder> {
 
 
-    Context context;
-    public static ArrayList<ItemFeed> list = new ArrayList<ItemFeed>();
+    public static Context context;
+    public static ArrayList<Post> list = new ArrayList<Post>();
     public static String url1 = "http://ihdmovie.xyz/root/api/feed_get.php?uid=1";
     public static AQuery aq;
 
-    public AdapterJson(Context context, ArrayList<ItemFeed> list) {
+    public AdapterJson(Context context, ArrayList<Post> list) {
         this.context = context;
         this.list = list;
     }
@@ -39,30 +45,28 @@ public class AdapterJson extends RecyclerView.Adapter<AdapterJson.ContactViewHol
 
     public void onBindViewHolder(ContactViewHolder contactViewHolder, int position) {
 
-        ItemFeed item = list.get(position);
+        Post item = list.get(position);
 
-        contactViewHolder.month.setText(item.getMonth());
+        contactViewHolder.month.setText(item.getName());
 
         contactViewHolder.date.setText(item.getDate());
-        contactViewHolder.number1.setText(item.getNumber1());
-        contactViewHolder.number2.setText(item.getNumber2());
-        contactViewHolder.number3.setText(item.getNumber3());
+        contactViewHolder.number1.setText(item.getLoveCount());
+        contactViewHolder.number2.setText(item.getCommentCount());
+        contactViewHolder.number3.setText(item.getShareCount());
         //contactViewHolder.messen.setText(item.getMessen());
 
-        contactViewHolder.messen.setText(Html.fromHtml("<strong><em>" + item.getMessen() + "</em></strong>"));
+        contactViewHolder.messen.setText(Html.fromHtml("<strong><em>" + item.getMessage() + "</em></strong>"));
 
 
         Picasso.with(context)
-                .load(item.getImageUrl())
+                .load(item.getImageProfileUrl())
                 .centerCrop()
                 .resize(100, 100)
                 .transform(new RoundedTransformation(50, 4))
                 .into(contactViewHolder.ImageUrl);
 
         Picasso.with(context)
-                .load(item.getImage_messen())
-                .placeholder(R.drawable.vdomax)
-
+                .load(item.getImagePostUrl())
                 .fit().centerCrop()
                 .into(contactViewHolder.image_messen);
 
@@ -94,6 +98,7 @@ public class AdapterJson extends RecyclerView.Adapter<AdapterJson.ContactViewHol
         //TextView view;
         ImageView ImageUrl;
         ImageView image_messen;
+        ButtonFlat  btnComment;
 
         public ContactViewHolder(View v) {
             super(v);
@@ -113,8 +118,11 @@ public class AdapterJson extends RecyclerView.Adapter<AdapterJson.ContactViewHol
             ImageUrl = (ImageView) v.findViewById(R.id.imageView);
             image_messen = (ImageView) v.findViewById(R.id.image_center);
 
+            btnComment = (ButtonFlat) v.findViewById(R.id.btn_comment);
+
             image_messen.setOnClickListener(this);
             ImageUrl.setOnClickListener(this);
+            btnComment.setOnClickListener(this);
 
         }
 
@@ -129,13 +137,14 @@ public class AdapterJson extends RecyclerView.Adapter<AdapterJson.ContactViewHol
 
 
 
-            } else if (view.getId() == R.id.imageView) {
+            } else if (view.getId() == R.id.btn_comment) {
 
-
+                Intent i = new Intent(view.getContext(), ActivityComment.class);
+                context.startActivity(i);
 
             }
 
-            //Toast.makeText(view.getContext(), "view = " + view.getId() + " position = " + getPosition(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), "view = " + view.getId() + " position = " + getPosition(), Toast.LENGTH_SHORT).show();
         }
 
 
