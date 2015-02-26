@@ -55,6 +55,9 @@ public class AdapterJson extends RecyclerView.Adapter<AdapterJson.ContactViewHol
         contactViewHolder.number3.setText(item.getShareCount());
         //contactViewHolder.messen.setText(item.getMessen());
 
+
+
+
         contactViewHolder.messen.setText(Html.fromHtml("<strong><em>" + item.getMessage() + "</em></strong>"));
 
 

@@ -140,6 +140,18 @@ public class FragmentFeed extends Fragment {
                 String message = obj.getString("text");
                 String date = obj.getString("timestamp");
 
+
+
+                int commentNuber = Integer.parseInt(viewCount.toString());
+                int  num_comment = 0;
+
+                if(commentNuber > 1000)
+                    num_comment = commentNuber / 1000;
+                    String num_comment2 = num_comment + "k";
+
+
+
+
 //                String view = obj.getString("view");
 //                String image_messen = obj.getString("image_messen");
 //                String number4 = obj.getString("number4");
@@ -170,7 +182,7 @@ public class FragmentFeed extends Fragment {
                 }
 
                 // Use view_count instead of share_count (share_count data is empty now)
-                Post post = new Post(imageAvatarUrl, name, date, loveCount, commentCount, viewCount
+                Post post = new Post(imageAvatarUrl, name, date, loveCount, commentCount, num_comment2
                         , message, shortMessage, viewCount, imagePhotoFullUrl);
                 post.setComments(comments);
 

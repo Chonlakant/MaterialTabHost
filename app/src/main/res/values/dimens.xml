@@ -30,6 +30,11 @@
     <dimen name="image_size_profile">45dp</dimen>
     <dimen name="size_image">25dp</dimen>
 
+    <dimen name="size_icon">10dp</dimen>
+    <dimen name="size_text_icon">10dp</dimen>
+
+    <dimen name="size_text">3dp</dimen>
+
 
 
 </resources>
