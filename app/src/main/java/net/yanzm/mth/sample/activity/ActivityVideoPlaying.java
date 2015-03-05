@@ -6,10 +6,15 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.androidquery.util.AQUtility;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
 
 import net.yanzm.mth.sample.R;
@@ -23,72 +28,90 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by root1 on 2/7/15.
- */
-public class ActivityVideoPlaying extends Activity {
-    public AQuery aq;
-    private int page;
-    String url = "http://ihdmovie.xyz/root/api/feed_get.php?uid=1";
-    ArrayList<item_vieos> list = new ArrayList<item_vieos>();
-    AdapterVideos adapterJson;
+public class ActivityVideoPlaying extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
+    public static final String API_KEY = "AIzaSyAOfxiG4aV66h3XmssCEkP3qCvCqMbDGDI";
+
+    //http://youtu.be/<VIDEO_ID>
+    public static final String VIDEO_ID = "QfVIaAUapvM";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /** attaching layout xml **/
         setContentView(R.layout.fragment_video_playing);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Sam Savek (@samsavek)");
+        /** Initializing YouTube player view **/
+        YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
+        youTubePlayerView.initialize(API_KEY, this);
 
-        ImageView imageView = (ImageView) findViewById(R.id.imageView10);
-        Picasso.with(getApplication())
-                .load("http://placehold.it/350x250")
-                .placeholder(R.drawable.ic_launcher)
-                .centerCrop()
-                .resize(100, 100)
-                .transform(new RoundedTransformation(50, 4))
-                .into(imageView);
-
-        TextView txt_title = (TextView) findViewById(R.id.textView10);
-        txt_title.setText("Aung Epicband");
-        TextView txt_music = (TextView) findViewById(R.id.textView11);
-        txt_music.setText("New Single - Epic [Official MV - HD]");
     }
 
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult result) {
+        Toast.makeText(getApplication(), "Failured to Initialize!", Toast.LENGTH_LONG).show();
+    }
 
-    public void getjson(String url, JSONObject jo, AjaxStatus status)
-            throws JSONException {
-        AQUtility.debug("jo", jo);
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
 
-        if (jo != null) {
-            JSONArray ja = jo.getJSONArray("posts");
-            for (int i = 0; i < ja.length(); i++) {
-                JSONObject obj = ja.getJSONObject(i);
+        /** add listeners to YouTubePlayer instance **/
+        player.setPlayerStateChangeListener(playerStateChangeListener);
+        player.setPlaybackEventListener(playbackEventListener);
 
-                //Log.d("Check",obj.toString());
-                String ImageUrl = obj.getString("image");
-                String month = obj.getString("month");
-                String number2 = obj.getString("number2");
-                String number4 = obj.getString("number4");
-
-
-                item_vieos list_item = new item_vieos();
-                list_item.setImage_url(ImageUrl);
-                list_item.setTitle(month);
-                list_item.setDetail(number4);
-                list_item.setTxt1(number2);
-                list_item.setTxt2(number2);
-
-                Log.d("Check", ImageUrl);
-
-                list.add(list_item);
-            }
-            adapterJson.notifyDataSetChanged();
-            AQUtility.debug("done");
-
-        } else {
-            AQUtility.debug("error!");
+        /** Start buffering **/
+        if (!wasRestored) {
+            player.cueVideo(VIDEO_ID);
         }
     }
+
+    private YouTubePlayer.PlaybackEventListener playbackEventListener = new YouTubePlayer.PlaybackEventListener() {
+
+        @Override
+        public void onBuffering(boolean arg0) {
+        }
+
+        @Override
+        public void onPaused() {
+        }
+
+        @Override
+        public void onPlaying() {
+        }
+
+        @Override
+        public void onSeekTo(int arg0) {
+        }
+
+        @Override
+        public void onStopped() {
+        }
+
+    };
+
+    private YouTubePlayer.PlayerStateChangeListener playerStateChangeListener = new YouTubePlayer.PlayerStateChangeListener() {
+
+        @Override
+        public void onAdStarted() {
+        }
+
+        @Override
+        public void onError(YouTubePlayer.ErrorReason arg0) {
+        }
+
+        @Override
+        public void onLoaded(String arg0) {
+        }
+
+        @Override
+        public void onLoading() {
+        }
+
+        @Override
+        public void onVideoEnded() {
+        }
+
+        @Override
+        public void onVideoStarted() {
+        }
+    };
 }

@@ -22,6 +22,9 @@ public class Post {
     private ArrayList<Comment> comments = new ArrayList<>();
     private ArrayList<Follow> follows = new ArrayList<>();
 
+
+
+
     public Post(String imageProfileUrl, String name, String date, String loveCount, String commentCount,
                 String shareCount, String message, String shortMessage, String viewCount, String imagePostUrl) {
 
@@ -157,5 +160,6 @@ public class Post {
     public void setFollows(ArrayList<Follow> follows) {
         this.follows = follows;
     }
+
 
 }

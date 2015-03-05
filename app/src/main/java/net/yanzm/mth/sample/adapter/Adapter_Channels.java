@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import net.yanzm.mth.sample.R;
 import net.yanzm.mth.sample.model.itemChannels;
+import net.yanzm.mth.sample.model.live;
 
 import java.util.ArrayList;
 //AdapterVideos
@@ -24,9 +25,9 @@ public class Adapter_Channels extends BaseAdapter {
     Context context;
 
 
-    public ArrayList<itemChannels> list = new ArrayList<itemChannels>();
+    public ArrayList<live> list = new ArrayList<live>();
 
-    public Adapter_Channels(Context context, ArrayList<itemChannels> list) {
+    public Adapter_Channels(Context context, ArrayList<live> list) {
         this.context = context;
         this.list = list;
     }
@@ -55,16 +56,16 @@ public class Adapter_Channels extends BaseAdapter {
         TextView name;
         ImageView ImageUrl;
         ImageView vdo_url;
-        itemChannels item = list.get(position);
+        live item = list.get(position);
         name = (TextView) row.findViewById(R.id.text);
 
         ImageUrl = (ImageView) row.findViewById(R.id.picture);
         vdo_url = (ImageView) row.findViewById(R.id.image_center);
 
-        name.setText(item.getName());
+        name.setText(item.getNameLive());
 
         Picasso.with(context)
-                .load(item.getTitle_url())
+                .load(item.getPhotoLive())
               //  .transform(new RoundedTransformation(50, 4))
                .centerCrop()
                 .resize(100, 100)

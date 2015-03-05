@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/libraryfloation" />
             <option value="$PROJECT_DIR$/mth" />
             <option value="$PROJECT_DIR$/observablescrollview" />
+            <option value="$PROJECT_DIR$/picker" />
           </set>
         </option>
       </GradleProjectSettings>

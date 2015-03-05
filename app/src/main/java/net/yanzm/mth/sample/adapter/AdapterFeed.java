@@ -1,7 +1,7 @@
 package net.yanzm.mth.sample.adapter;
 
 import android.content.Context;
-import android.content.Intent;
+
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -9,30 +9,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.androidquery.AQuery;
 import com.gc.materialdesign.views.ButtonFlat;
 import com.squareup.picasso.Picasso;
 
-import net.yanzm.mth.sample.activity.ActivityComment;
 import net.yanzm.mth.sample.model.Post;
 import net.yanzm.mth.sample.R;
 import net.yanzm.mth.sample.RoundedTransformation;
 
 import java.util.ArrayList;
 
-import static android.support.v4.app.ActivityCompat.startActivity;
-
-public class AdapterJson extends RecyclerView.Adapter<AdapterJson.ContactViewHolder> {
+public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.ContactViewHolder>  {
 
 
     public static Context context;
     public static ArrayList<Post> list = new ArrayList<Post>();
     public static String url1 = "http://ihdmovie.xyz/root/api/feed_get.php?uid=1";
-    public static AQuery aq;
+    public static   ContactViewHolder.OnItemClickListener mItemClickListener;
 
-    public AdapterJson(Context context, ArrayList<Post> list) {
+    public AdapterFeed(Context context, ArrayList<Post> list) {
         this.context = context;
         this.list = list;
     }
@@ -41,6 +36,8 @@ public class AdapterJson extends RecyclerView.Adapter<AdapterJson.ContactViewHol
     public int getItemCount() {
         return list.size();
     }
+
+
 
 
     public void onBindViewHolder(ContactViewHolder contactViewHolder, int position) {
@@ -84,6 +81,8 @@ public class AdapterJson extends RecyclerView.Adapter<AdapterJson.ContactViewHol
 
         return new ContactViewHolder(itemView);
     }
+
+
 
     public static class ContactViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -129,25 +128,39 @@ public class AdapterJson extends RecyclerView.Adapter<AdapterJson.ContactViewHol
 
         }
 
+        public interface OnItemClickListener {
+            public void onItemClick(View view , int position);
+        }
 
 
         @Override
         public void onClick(View view ) {
 
-
-            aq = new AQuery(view.getContext());
-            if (view.getId() == R.id.image_center) {
-
-
-
-            } else if (view.getId() == R.id.btn_comment) {
-
-                Intent i = new Intent(view.getContext(), ActivityComment.class);
-                context.startActivity(i);
-
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(view, getPosition());
             }
 
-            Toast.makeText(view.getContext(), "view = " + view.getId() + " position = " + getPosition(), Toast.LENGTH_SHORT).show();
+
+
+//
+//            aq = new AQuery(view.getContext());
+//            if (view.getId() == R.id.image_center) {
+//
+////                FragmentPhotofeed fragment = new FragmentPhotofeed();
+////                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+////                transaction.add(R.id.fragment_container, fragment);
+////                transaction.commit();
+//
+//
+//
+//            } else if (view.getId() == R.id.btn_comment) {
+//
+//                Intent i = new Intent(view.getContext(), ActivityComment.class);
+//                context.startActivity(i);
+//
+//            }
+//
+//            Toast.makeText(view.getContext(), "view = " + view.getId() + " position = " + getPosition(), Toast.LENGTH_SHORT).show();
         }
 
 

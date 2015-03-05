@@ -17,6 +17,7 @@ import com.androidquery.util.AQUtility;
 import net.yanzm.mth.sample.R;
 import net.yanzm.mth.sample.adapter.Adapter_Channels;
 import net.yanzm.mth.sample.model.itemChannels;
+import net.yanzm.mth.sample.model.live;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +31,8 @@ public class ActivityChannels extends Activity {
     public AQuery aq;
     private int page;
     String url = "http://ihdmovie.xyz/root/api/feed_get.php?uid=1";
-    ArrayList<itemChannels> list = new ArrayList<itemChannels>();
+    String urlLive = "http://api.vdomax.com/live/history/161";
+    ArrayList<live> list = new ArrayList<live>();
     Adapter_Channels adapterJson;
     GridView listView;
     @Override
@@ -42,8 +44,11 @@ public class ActivityChannels extends Activity {
         aq = new AQuery(this);
         adapterJson = new Adapter_Channels(this, list);
         listView = (GridView) findViewById(R.id.gridview);
-        aq.ajax(url, JSONObject.class, this, "getjson");
+
         listView.setAdapter(adapterJson);
+
+
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -54,31 +59,25 @@ public class ActivityChannels extends Activity {
             }
         });
 
+        aq.ajax(urlLive, JSONObject.class, this, "getjson");
+
     }
     public void getjson(String url, JSONObject jo, AjaxStatus status)
             throws JSONException {
         AQUtility.debug("jo", jo);
 
         if (jo != null) {
-            JSONArray ja = jo.getJSONArray("posts");
+            JSONArray ja = jo.getJSONArray("history");
             for (int i = 0; i < ja.length(); i++) {
                 JSONObject obj = ja.getJSONObject(i);
 
-                //Log.d("Check",obj.toString());
-                String ImageUrl = obj.getString("image_messen");
-                String month = obj.getString("date");
+                 String photoLive = obj.optString("thumb");
+                String nameLive = obj.optString("name");
 
 
 
-                itemChannels list_item = new itemChannels();
-                list_item.setName(month);
-                list_item.setTitle_url(ImageUrl);
-                list_item.setVdo_url(ImageUrl);
-
-
-                Log.d("Check", ImageUrl);
-
-                list.add(list_item);
+                live live = new live(null,photoLive,nameLive,null,null,null);
+                list.add(live);
             }
             adapterJson.notifyDataSetChanged();
             AQUtility.debug("done");

@@ -1,21 +1,30 @@
 package net.yanzm.mth.sample.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.androidquery.util.AQUtility;
+import com.squareup.otto.Produce;
 
 import net.yanzm.mth.sample.R;
+import net.yanzm.mth.sample.adapter.AdapterJsonFeed;
 import net.yanzm.mth.sample.adapter.AdapterVideos;
-import net.yanzm.mth.sample.model.item_vieos;
+import net.yanzm.mth.sample.event.LoadListYouTubeEvent;
+import net.yanzm.mth.sample.event.LoadYouTubeEvent;
+import net.yanzm.mth.sample.event.RespondEvent;
+import net.yanzm.mth.sample.model.Youtube;
+import net.yanzm.mth.sample.onclick.OnItemClickListenerListViewItem;
+import net.yanzm.mth.sample.util.BusProvider;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,38 +33,47 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class ActivityVideos extends Activity {
-    // Store instance variables
-    //private String title;
+
+    ArrayList<LoadYouTubeEvent> arrayYouTubeLoaded = new ArrayList<>();
+
     public AQuery aq;
     private int page;
-    String url = "http://ihdmovie.xyz/root/api/feed_get.php?uid=1";
-    ArrayList<item_vieos> list = new ArrayList<item_vieos>();
-    AdapterVideos adapterJson;
-    ListView listView; Toolbar toolbar;
+    String url = "http://ihdmovie.xyz/feed5.json";
+    ArrayList<Youtube> list = new ArrayList<Youtube>();
+
+    AdapterVideos adapterVideos;
+    ListView ls;
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_videos);
-         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Sam Savek (@samsavek)");
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        toolbar.setTitle("Sam Savek (@samsavek)");
+        //BusProvider.getInstance().register(this);
 
+        aq = new AQuery(this);
+        adapterVideos = new AdapterVideos(this, list);
+        ls = (ListView) findViewById(R.id.list_youtube);
+        ls.setAdapter(adapterVideos);
 
-        aq = new AQuery(getApplication());
-        adapterJson = new AdapterVideos(getApplicationContext(), list);
-        listView = (ListView) findViewById(R.id.listView4);
-        aq.ajax(url, JSONObject.class, this, "getjson");
-        listView.setAdapter(adapterJson);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        adapterVideos.SetOnItemClickListener(new AdapterVideos.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 0){
-
-                    Toast.makeText(getApplicationContext(),"Text",Toast.LENGTH_SHORT).show();
-                }
+            public void onItemClick(View view) {
+                Toast.makeText(getBaseContext(),"",Toast.LENGTH_LONG).show();
             }
         });
 
+
+
+
+        aq.ajax(url, JSONObject.class, this, "getjson");
+
     }
+
+
+
     public void getjson(String url, JSONObject jo, AjaxStatus status)
             throws JSONException {
         AQUtility.debug("jo", jo);
@@ -65,29 +83,37 @@ public class ActivityVideos extends Activity {
             for (int i = 0; i < ja.length(); i++) {
                 JSONObject obj = ja.getJSONObject(i);
 
-                //Log.d("Check",obj.toString());
-                String ImageUrl = obj.getString("image");
-                String month = obj.getString("month");
-                String number2 = obj.getString("number2");
-                String number4 = obj.getString("image_messen");
+
+                JSONObject youtube = obj.getJSONObject("youtube");
+                String idUserYourTube = youtube.optString("id");
+                String titleUserYouTube = youtube.optString("title");
+                String description = youtube.optString("description");
+                String thumbnailYouTube = youtube.optString("thumbnail");
+
+                String shortMessage;
+                if (description.length() > 200)
+                    shortMessage = description.substring(0, 70);
+                else
+                    shortMessage = description;
+
+                JSONObject author = obj.getJSONObject("author");
+                String imageUser = author.optString("avatar");
+                String imageTitleUser = "https://www.vdomax.com/" + imageUser + "";
+
+                Youtube list_item = new Youtube(imageTitleUser, titleUserYouTube, shortMessage, thumbnailYouTube);
 
 
-                item_vieos list_item = new item_vieos();
-                list_item.setImage_url(number4);
-                list_item.setTitle(month);
-                list_item.setDetail(month);
-                list_item.setTxt1(number2);
-                list_item.setTxt2(number2);
-
-                Log.d("Check", ImageUrl);
+                Log.d("chonlakant", idUserYourTube);
 
                 list.add(list_item);
+
             }
-            adapterJson.notifyDataSetChanged();
+            adapterVideos.notifyDataSetChanged();
             AQUtility.debug("done");
 
         } else {
             AQUtility.debug("error!");
         }
     }
+
 }

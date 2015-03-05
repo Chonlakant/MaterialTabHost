@@ -1,1 +1,1 @@
-include ':app', ':mth', ':libraryfloation', ':observablescrollview'
+include ':app', ':mth', ':libraryfloation', ':observablescrollview', 'picker'

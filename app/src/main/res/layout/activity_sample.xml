@@ -131,7 +131,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:id="@+id/left_drawer"
-                android:background="#ffffff"
+
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="start">

@@ -1,33 +1,34 @@
 package net.yanzm.mth.sample.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import net.yanzm.mth.sample.R;
 import net.yanzm.mth.sample.RoundedTransformation;
-import net.yanzm.mth.sample.model.item_vieos;
+
+import net.yanzm.mth.sample.model.Youtube;
+
 
 import java.util.ArrayList;
-//AdapterVideos
 
-/**
- * Created by root1 on 1/31/15.
- */
-public class AdapterVideos extends BaseAdapter {
+public class AdapterVideos extends BaseAdapter implements AdapterView.OnClickListener {
 
     Context context;
+    OnItemClickListener mItemClickListener;
 
+    public ArrayList<Youtube> list = new ArrayList<Youtube>();
 
-    public ArrayList<item_vieos> list = new ArrayList<item_vieos>();
-
-    public AdapterVideos(Context context, ArrayList<item_vieos> list) {
+    public AdapterVideos(Context context, ArrayList<Youtube> list) {
         this.context = context;
         this.list = list;
     }
@@ -55,35 +56,58 @@ public class AdapterVideos extends BaseAdapter {
         View row = mInflater.inflate(R.layout.item_videos, parent, false);
         TextView title;
         TextView detail;
-        TextView txt1;
-        TextView txt2;
+
         ImageView ImageUrl;
         ImageView image_title;
-        item_vieos item = list.get(position);
+
+        Youtube item = list.get(position);
         title = (TextView) row.findViewById(R.id.textView10);
         detail = (TextView) row.findViewById(R.id.textView11);
-        txt1 = (TextView) row.findViewById(R.id.number2);
-        txt2 = (TextView) row.findViewById(R.id.number3);
+
         ImageUrl = (ImageView) row.findViewById(R.id.imageView10);
         image_title = (ImageView) row.findViewById(R.id.image_title);
 
         title.setText(item.getTitle());
-        detail.setText("New Single - Epic [Official MV - HD]");
-//        HD.setText(item.getTxt1());
-//        txt2.setText(item.getTxt2());
+        detail.setText(item.getDescription());
+
 
         Picasso.with(context)
-                .load(item.getImage_url())
-//                .centerCrop()
-//                .resize(150, 100)
+                .load(item.getThumbnail())
                 .into(image_title);
 
         Picasso.with(context)
-                .load(item.getImage_url())
+                .load(item.getId())
                 .transform(new RoundedTransformation(50, 4))
                 .resize(100, 100)
                 .into(ImageUrl);
+
+        image_title.setOnClickListener(this);
+
+
         return row;
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.image_title:
+                if (mItemClickListener != null) {
+                    mItemClickListener.onItemClick(v);
+                }
+                break;
+
+        }
+    }
+
+
+    public interface OnItemClickListener {
+        public void onItemClick(View view);
+    }
+
+    public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
+    }
+
+
 }
 

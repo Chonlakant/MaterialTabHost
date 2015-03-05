@@ -18,7 +18,6 @@ import com.squareup.picasso.Picasso;
 import net.yanzm.mth.sample.R;
 import net.yanzm.mth.sample.RoundedTransformation;
 import net.yanzm.mth.sample.adapter.AdapterComment;
-import net.yanzm.mth.sample.adapter.AdapterJson;
 import net.yanzm.mth.sample.model.Comment;
 import net.yanzm.mth.sample.model.Post;
 
@@ -147,8 +146,6 @@ public class ActivityComment extends ActionBarActivity {
                         JSONObject accountJsonObject = commentJsonObject.getJSONObject("account");
                         String commentId = accountJsonObject.optString("id");
                         String commentName = accountJsonObject.optString("name");
-
-
 
 
                         Comment comment = new Comment(imageAvatarUrl, commentName, null, null, commentText, commentId);

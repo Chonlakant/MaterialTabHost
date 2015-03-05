@@ -3,8 +3,10 @@ package net.yanzm.mth.sample.fragment;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -14,13 +16,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.androidquery.util.AQUtility;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import net.yanzm.mth.sample.R;
-import net.yanzm.mth.sample.adapter.AdapterJson;
+import net.yanzm.mth.sample.activity.ActivityWritePost;
+import net.yanzm.mth.sample.adapter.AdapterFeed;
+import net.yanzm.mth.sample.adapter.AdapterJsonFeed;
 import net.yanzm.mth.sample.model.Comment;
 import net.yanzm.mth.sample.model.Post;
 
@@ -30,12 +37,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+
 public class FragmentFeed extends Fragment {
+
+    private static final int INTENT_REQUEST_GET_IMAGES = 13;
+
     String url = "http://ihdmovie.xyz/root/api/feed_get.php?uid=1";
     String url2 = "http://ihdmovie.xyz/feed.json";
     String url3 = "http://ihdmovie.xyz/feed3.json";
+    String urlMain = "http://ihdmovie.xyz/main_feed.json";
     ArrayList<Post> list = new ArrayList<Post>();
-    AdapterJson adapterJson;
+    AdapterJsonFeed adapter;
+    AdapterFeed adapterJson;
     RelativeLayout layoutMenu;
 
     public AQuery aq;
@@ -44,10 +57,11 @@ public class FragmentFeed extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_fragment_feed, container, false);
 
         aq = new AQuery(getActivity());
-        adapterJson = new AdapterJson(getActivity(), list);
+        adapterJson = new AdapterFeed(getActivity(), list);
+        adapter = new AdapterJsonFeed(getActivity(), list);
 
 
-        layoutMenu = (RelativeLayout)rootView.findViewById(R.id.layoutMenu);
+        layoutMenu = (RelativeLayout) rootView.findViewById(R.id.layoutMenu);
 
         RecyclerView recList = (RecyclerView) rootView.findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
@@ -56,7 +70,32 @@ public class FragmentFeed extends Fragment {
         recList.setLayoutManager(llm);
 
 
-        recList.setAdapter(adapterJson);
+        recList.setAdapter(adapter);
+
+
+        adapter.SetOnItemClickListener(new AdapterJsonFeed.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+
+                String photo = list.get(position).getImagePostUrl();
+
+                Toast.makeText(getActivity(), "id" + view.getId(), Toast.LENGTH_LONG).show();
+
+
+                Bundle data = new Bundle();
+                data.putString("url", photo);
+                FragmentPhotofeed fragment = new FragmentPhotofeed();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.add(R.id.svScroll, fragment);
+                fragment.setArguments(data);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+
+            }
+        });
+
 
         recList.setOnTouchListener(new View.OnTouchListener() {
 
@@ -65,6 +104,7 @@ public class FragmentFeed extends Fragment {
             float startY = 0;
             float dist = 0;
             boolean isMenuHide = false;
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
@@ -95,7 +135,30 @@ public class FragmentFeed extends Fragment {
             }
         });
 
-        aq.ajax(url3, JSONObject.class, this, "getJson");
+        FloatingActionButton buttonWritePost = (FloatingActionButton) rootView.findViewById(R.id.action_h);
+        buttonWritePost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), ActivityWritePost.class);
+                startActivity(i);
+            }
+        });
+
+        FloatingActionButton buttonImage = (FloatingActionButton) rootView.findViewById(R.id.action_f);
+        buttonImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentPhotofeed fragment = new FragmentPhotofeed();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.add(R.id.svScroll, fragment);
+                transaction.commit();
+
+
+            }
+        });
+
+        aq.ajax(urlMain, JSONObject.class, this, "getJson");
 
         return rootView;
     }
@@ -141,15 +204,12 @@ public class FragmentFeed extends Fragment {
                 String date = obj.getString("timestamp");
 
 
-
                 int commentNuber = Integer.parseInt(viewCount.toString());
-                int  num_comment = 0;
+                int num_comment = 0;
 
-                if(commentNuber > 1000)
+                if (commentNuber > 1000)
                     num_comment = commentNuber / 1000;
-                    String num_comment2 = num_comment + "k";
-
-
+                String num_comment2 = num_comment + "k";
 
 
 //                String view = obj.getString("view");
@@ -186,22 +246,6 @@ public class FragmentFeed extends Fragment {
                         , message, shortMessage, viewCount, imagePhotoFullUrl);
                 post.setComments(comments);
 
-               // post.setComments();
-
-
-//                Post list_item = new Post();
-//                list_item.setImageUrl(Avatra);
-//                list_item.setName(name);
-//                list_item.setDate(day);
-//                list_item.setLoveCount(number1);
-//                list_item.setCommentCount(number2);
-//                list_item.setSherdCount(number3);
-//                list_item.setMessage(sub);
-//                list_item.setImage_messen(photo);
-//                list_item.setView(view);
-//                Log.d("Check", ImageUrl);
-//
-//
                 list.add(post);
             }
             adapterJson.notifyDataSetChanged();
